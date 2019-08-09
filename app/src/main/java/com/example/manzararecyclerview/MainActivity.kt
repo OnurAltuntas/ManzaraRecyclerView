@@ -1,15 +1,28 @@
 package com.example.manzararecyclerview
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     var tumManzaralar=ArrayList<Manzara>()
 
+    @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        veriKaynagınıDoldur()
+
+        var myAdapter = ManzaraAdapter(tumManzaralar)
+
+        recyclerViewManzara.adapter = myAdapter
+
+        var linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recyclerViewManzara.layoutManager = linearLayoutManager
     }
 
     fun veriKaynagınıDoldur():ArrayList<Manzara>{
@@ -42,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
         for(i in 0..tumResimler.size-1){
             var eklenecekManzara=Manzara("Manzara "+i,"Açiklama "+i,tumResimler[i])
-
+            tumManzaralar.add(eklenecekManzara)
         }
 
         return tumManzaralar
